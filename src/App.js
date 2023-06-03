@@ -1,6 +1,5 @@
 // import logo from './logo.svg';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import React, {Component} from 'react';
 import Menu from './components/MenuComponents';
