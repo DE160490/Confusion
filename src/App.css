@@ -36,3 +36,70 @@
     transform: rotate(360deg);
   }
 }
+
+.colortest1 {
+  background-color: #92d441;
+  color: rgb(224, 58, 58);
+}
+
+.colortest2 {
+  background-color: rgb(232, 121, 232);
+  color: rgb(237, 214, 98);
+}
+
+.colortest3 {
+  background-color: rgb(187, 232, 75);
+  color: rgb(85, 236, 219);
+}
+
+.Website {
+  background-color: #f1f8ff;
+  color: #666565;
+}
+
+.header {
+  background-color: #0f172b;
+  color: #fea116;
+}
+
+.footer {
+  background-color: #0f172b;
+}
+
+* {
+  margin: auto;
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    display: none !important;
+  }
+}
+
+.wrapper {
+  background-color: #ffff;
+  color: rgb(74, 74, 74);
+  display: flex;
+  align-items: center;
+}
+
+.wrapper > p {
+  margin-left: 0;
+  margin-top: 15px;
+}
+
+.wrapperfooter {
+  margin: 0;
+  display: inline-flex;
+}
+
+.wrapperfooter > p {
+  margin-left: 0px;
+  margin-top: 15px;
+  display: inline-block;
+}
+
+.wrapperfooter > a > i {
+  color: #ffff;
+  margin-left: 0px;
+}
