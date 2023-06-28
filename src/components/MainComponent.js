@@ -1,5 +1,3 @@
-// import { Navbar, NavbarBrand } from "reactstrap";
-
 import React, { Component } from "react";
 import Menu from "./MenuComponent";
 import DishDetail from "./DishesComponent";
@@ -7,7 +5,13 @@ import { DISHES } from "../shared/dishes";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+  withRouter,
+} from "react-router-dom";
 import Contact from "./ContactComponent";
 import { COMMENTS } from "../shared/comments";
 import { PROMOTIONS } from "../shared/promotions";
@@ -40,9 +44,9 @@ class Main extends Component {
     const HomePage = () => {
       return (
         <Home
-          dish={this.props.dishes.filter((dish) => dish.featured)[0]}
-          promotion={this.props.promotions.filter((promo) => promo.featured)[0]}
-          leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+          dish={this.state.dishes.filter((dish) => dish.featured)[0]}
+          promotion={this.state.promotions.filter((promo) => promo.featured)[0]}
+          leader={this.state.leaders.filter((leader) => leader.featured)[0]}
         />
       );
     };
@@ -67,11 +71,16 @@ class Main extends Component {
         <Header />
         <Routes>
           <Route path="/home" element={<HomePage />} />
-          {/* <Route exact path='/aboutus'  element={() => <About leaders={this.props.leaders} />} /> */}
+          {/* <Route exact path='/aboutus' element={() => <About leaders={this.props.leaders} />}/> */}
           <Route
             exact
             path="/menu"
-            element={<Menu dishes={this.props.dishes} />}
+            element={
+              <Menu
+                dishes={this.state.dishes}
+                onClick={(dishId) => this.onDishSelect(dishId)}
+              />
+            }
           />
           <Route exact path="/contactus" element={<Contact />} />
           <Route exact path="/login" element={<Login />} />
