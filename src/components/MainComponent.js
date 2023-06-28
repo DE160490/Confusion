@@ -5,6 +5,7 @@ import { DISHES } from "../shared/dishes";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
+import About from "./AboutUsComponent";
 import {
   Routes,
   Route,
@@ -71,7 +72,7 @@ class Main extends Component {
         <Header />
         <Routes>
           <Route path="/home" element={<HomePage />} />
-          {/* <Route exact path='/aboutus' element={() => <About leaders={this.props.leaders} />}/> */}
+          <Route exact path="/aboutus" element={<About />} />
           <Route
             exact
             path="/menu"
