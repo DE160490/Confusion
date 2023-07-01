@@ -2,7 +2,7 @@ export const LEADERS = [
   {
     id: 0,
     name: "Peter Pan",
-    image: "./assets/img/Bảo.png",
+    image: "./assets/img/Thành.png",
     designation: "Chief Epicurious Officer",
     abbr: "CEO",
     featured: true,
@@ -12,7 +12,7 @@ export const LEADERS = [
   {
     id: 1,
     name: "Dhanasekaran Witherspoon",
-    image: "./assets/img/Thành.png",
+    image: "./assets/img/Bảo.png",
     designation: "Chief Food Officer",
     abbr: "CFO",
     featured: false,

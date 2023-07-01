@@ -6,18 +6,14 @@ import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
 import About from "./AboutUsComponent";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useParams,
-  withRouter,
-} from "react-router-dom";
+import Login from "./Login";
+import { Routes, Route } from "react-router-dom";
 import Contact from "./ContactComponent";
 import { COMMENTS } from "../shared/comments";
 import { PROMOTIONS } from "../shared/promotions";
 import { LEADERS } from "../shared/leaders";
-import Login from "./Login";
+
+import { addComment } from "../redux/ActionCreators";
 
 import { connect } from "react-redux";
 
@@ -29,6 +25,11 @@ const mapStateToProps = (state) => {
     leaders: state.leaders,
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (dishId, rating, author, comment) =>
+    dispatch(addComment(dishId, rating, author, comment)),
+});
 
 class Main extends Component {
   constructor(props) {
@@ -63,6 +64,7 @@ class Main extends Component {
           comments={this.props.comments.filter(
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
+          addComment={this.props.addComment}
         />
       );
     };
@@ -93,4 +95,4 @@ class Main extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
