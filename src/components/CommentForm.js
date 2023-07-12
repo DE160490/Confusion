@@ -8,7 +8,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Control, Errors, LocalForm } from "react-redux-form";
+import { Control, Errors, LocalForm, Form, actions } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -38,6 +38,7 @@ class CommentForm extends Component {
       values.author,
       values.comment
     );
+    this.props.resetFeedbackForm();
   }
 
   render() {

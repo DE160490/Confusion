@@ -3,7 +3,6 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   Button,
-  Form,
   FormGroup,
   Label,
   Input,
@@ -13,7 +12,7 @@ import {
   Container,
 } from "reactstrap";
 import { Link } from "react-router-dom";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, LocalForm, Errors, actions, Form } from "react-redux-form";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -47,25 +46,10 @@ class Contact extends Component {
     this.handleBlur = this.handleBlur.bind(this);
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleSubmit(event) {
-    console.log("Current State is: " + JSON.stringify(this.state));
-    alert("Current State is: " + JSON.stringify(this.state));
-    event.preventDefault();
-  }
-
   handleSubmit(values) {
     console.log("Current State is: " + JSON.stringify(values));
     alert("Current State is: " + JSON.stringify(values));
+    this.props.resetFeedbackForm();
     // event.preventDefault();
   }
 
@@ -74,6 +58,7 @@ class Contact extends Component {
       touched: { ...this.state.touched, [field]: true },
     });
   };
+
   validate(firstname, lastname, telnum, email) {
     const errors = {
       firstname: "",
@@ -104,6 +89,22 @@ class Contact extends Component {
     return errors;
   }
 
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleSubmit(event) {
+    console.log("Current State is: " + JSON.stringify(this.state));
+    alert("Current State is: " + JSON.stringify(this.state));
+    // event.preventDefault();
+  }
+
   render() {
     const errors = this.validate(
       this.state.firstname,
@@ -113,8 +114,20 @@ class Contact extends Component {
     );
     return (
       <div className="container">
-        <div className="row row-content">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/home">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+          </Breadcrumb>
           <div className="col-12">
+            <h3>Contact Us</h3>
+            <hr />
+          </div>
+        </div>
+        <div className="row row-content">
+          {/* <div className="col-12">
             <h3>Location Information</h3>
           </div>
           <div className="col-12 col-sm-4 offset-sm-1">
@@ -157,7 +170,7 @@ class Contact extends Component {
                 <i className="fa fa-envelope-o"></i> Email
               </a>
             </div>
-          </div>
+          </div> */}
           <div className="row row-content">
             <div className="col-12">
               <h3>Send us your Feedback</h3>
@@ -398,7 +411,6 @@ class Contact extends Component {
               </LocalForm>
             </div>
           </div>
-          ;
         </div>
       </div>
     );

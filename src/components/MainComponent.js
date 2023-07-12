@@ -7,7 +7,7 @@ import Footer from "./FooterComponent";
 import Home from "./HomeComponent";
 import About from "./AboutUsComponent";
 import Login from "./Login";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Contact from "./ContactComponent";
 import { COMMENTS } from "../shared/comments";
 import { PROMOTIONS } from "../shared/promotions";
@@ -16,6 +16,7 @@ import { LEADERS } from "../shared/leaders";
 import { addComment, fetchDishes } from "../redux/ActionCreators";
 
 import { connect } from "react-redux";
+import { actions } from "react-redux-form";
 
 const mapStateToProps = (state) => {
   return {
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addComment(dishId, rating, author, comment)),
   fetchDishes: () => {
     dispatch(fetchDishes());
+  },
+  resetFeedbackForm: () => {
+    dispatch(actions.reset("feedback"));
   },
 });
 
@@ -62,18 +66,19 @@ class Main extends Component {
       );
     };
 
-    const DishWithId = ({ match }) => {
+    const DishWithId = () => {
+      const { dishId } = useParams();
       return (
         <DishDetail
           dish={
             this.props.dishes.dishes.filter(
-              (dish) => dish.id === parseInt(match.params.dishId, 10)
+              (dish) => dish.id === parseInt(dishId, 10)
             )[0]
           }
           isLoading={this.props.dishes.isLoading}
           errMess={this.props.dishes.errMess}
           comments={this.props.comments.filter(
-            (comment) => comment.dishId === parseInt(match.params.dishId, 10)
+            (comment) => comment.dishId === parseInt(dishId, 10)
           )}
           addComment={this.props.addComment}
         />
@@ -97,6 +102,7 @@ class Main extends Component {
             }
           />
           <Route exact path="/contactus" element={<Contact />} />
+          {/* <Route exact path="/contactus" element={() => ( <Contact resetFeedbackForm={this.props.resetFeedbackForm} />)}/> */}
           <Route exact path="/login" element={<Login />} />
           <Route path="/menu/:dishId" element={<DishWithId />} />
         </Routes>
